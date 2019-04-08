@@ -9,12 +9,16 @@ const Comment = ({ id, body = '', edit, remove }) => {
 
   return (
     <div>
-      <input
+      <textarea
         value={body}
         onChange={onChangeBody}
         placeholder="Comment"
+        style={{ width: '50%', minHeight: 20, border: 'solid 1px #ddd' }}
       />
-      <Remove onClick={remove}/>
+      <Remove
+        onClick={remove}
+        style={{ position: 'absolute' }}
+      />
     </div>
   );
 };

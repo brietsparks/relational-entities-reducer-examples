@@ -8391,6 +8391,11 @@ relateurl@0.2.x:
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
   integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
 
+relational-entities-reducer@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/relational-entities-reducer/-/relational-entities-reducer-0.1.0.tgz#101b3a503c5f5ef6ce3e5cfb8a521eb522fe8e2d"
+  integrity sha512-DXznUC9gykkrY8GMwk8MGdk1NwoLcwdE6XtS9HDQ+lWXQ4buitYGY/H6zxYQ0JrJ4u4NF/dd2GTGZwiOTEZtEQ==
+
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz#c24bce2a283adad5bc3f58e0d48249b92379d8ef"

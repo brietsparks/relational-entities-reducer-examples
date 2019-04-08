@@ -1,6 +1,6 @@
 {
   "name": "relational-entities-reducer-examples",
-  "homepage": "",
+  "homepage": "https://brietsparks.github.io/relational-entities-reducer-examples",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,13 +11,16 @@
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
+    "relational-entities-reducer": "^0.1.0",
     "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

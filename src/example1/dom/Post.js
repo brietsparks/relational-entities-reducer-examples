@@ -4,11 +4,13 @@ import { Card, Form, Heading, Content } from 'react-bulma-components';
 
 import { getEntity, editEntity, removeEntity, reorderEntity } from '../state';
 import Comments from './Comments';
+import { MoveUp, MoveDown, Remove } from './Icons';
 
 const { Field, Label, Control, Input, Textarea } = Form;
 
 const Post = ({
   id,
+  index,
   title = '',
   body = '',
   commentIds = [],
@@ -24,8 +26,16 @@ const Post = ({
     <Card>
       <Card.Content>
         <div>
-          <button onClick={decrementIndex}>Move Up</button>
-          <button onClick={incrementIndex}>Move down</button>
+          <MoveUp onClick={decrementIndex}/>
+          <MoveDown onClick={incrementIndex}/>
+          <Remove
+            onClick={remove}
+            style={{
+              position: 'absolute',
+              right: 0,
+              marginRight: 20
+            }}
+          />
         </div>
 
         <div>
@@ -33,9 +43,8 @@ const Post = ({
             <Label>Title</Label>
             <Control>
               <Input
-                name="title"
                 type="text"
-                placeholder="Title"
+                placeholder={`Title (${id})`}
                 value={title}
                 onChange={onChangeTitle}
               />
@@ -56,8 +65,6 @@ const Post = ({
             </Control>
           </Field>
         </div>
-
-        <button onClick={remove}>Remove</button>
 
         <hr/>
 

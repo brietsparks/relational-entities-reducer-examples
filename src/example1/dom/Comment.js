@@ -2,14 +2,19 @@ import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 
 import { getEntity, editEntity, removeEntity } from '../state';
+import { Remove } from './Icons';
 
 const Comment = ({ id, body = '', edit, remove }) => {
   const onChangeBody = useCallback(e => edit({ body: e.target.value }));
 
   return (
     <div>
-      <input value={body} onChange={onChangeBody} />
-      <button onClick={remove}>Remove</button>
+      <input
+        value={body}
+        onChange={onChangeBody}
+        placeholder="Comment"
+      />
+      <Remove onClick={remove}/>
     </div>
   );
 };

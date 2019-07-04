@@ -1,17 +1,26 @@
 {
-  "name": "kanban",
+  "name": "relational-entities-reducer-examples",
+  "homepage": "https://brietsparks.github.io/relational-entities-reducer-examples",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.8.6",
+    "react-bulma-components": "2.3.0",
     "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
+    "react-redux": "^6.0.1",
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "relational-entities-reducer": "^0.1.0",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -21,5 +30,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  }
 }

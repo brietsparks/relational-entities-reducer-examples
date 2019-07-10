@@ -1,5 +1,5 @@
-Example app for [Relational Entities Reducer](https://github.com/brietsparks/relational-entities-reducer).
+This is the example app for [Relational Entities Reducer](https://github.com/brietsparks/relational-entities-reducer).
 
-[Live site]()
+## [Live Demo](https://brietsparks.github.io/relational-entities-reducer-examples)
 
-[Source code](https://github.com/brietsparks/relational-entities-reducer) 
+## [Library Source code](https://github.com/brietsparks/relational-entities-reducer) 

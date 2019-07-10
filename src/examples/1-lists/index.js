@@ -4,6 +4,7 @@ import makeReducerAndActions from 'relational-entities-reducer';
 
 import posed, { PoseGroup } from 'react-pose'
 
+import Grid from '@material-ui/core/Grid'
 import MuiContainer from '@material-ui/core/Container';
 import MuiCard from '@material-ui/core/Card';
 import MuiCardContent from '@material-ui/core/CardContent';
@@ -18,6 +19,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ArrowUpIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownIcon from '@material-ui/icons/ArrowDownward';
 
+import StatePresenter from '../../components/StatePresenter';
 import schema from './schema';
 import { configureStore } from '../store';
 import { randomString } from '../util';
@@ -47,10 +49,23 @@ export const App = () => {
 
   return (
     <Provider store={store}>
-      <Todos/>
+      <Grid container>
+        <Grid item xs={3} sm={3} md={6}>
+          <MuiContainer>
+            <Todos/>
+          </MuiContainer>
+        </Grid>
+        <Grid item xs={3} sm={3} md={6}>
+          <MuiContainer>
+            <State/>
+          </MuiContainer>
+        </Grid>
+      </Grid>
     </Provider>
   );
 };
+
+const State = connect(state => ({state}))(StatePresenter);
 
 // Todos is a collection of lists
 export const Todos = connect(

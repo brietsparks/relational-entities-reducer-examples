@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect, Provider } from 'react-redux';
+import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
 import MuiContainer from '@material-ui/core/Container';
 import MuiTextField from '@material-ui/core/TextField';
@@ -8,6 +9,8 @@ import MuiLink from '@material-ui/core/Link';
 import CloseIcon from '@material-ui/icons/Close';
 
 import makeReducerAndActions from 'relational-entities-reducer';
+
+import StatePresenter from '../../components/StatePresenter';
 
 import schema from './schema';
 import { configureStore } from '../store';
@@ -19,16 +22,16 @@ const initialState = {
   comment: {
     resources: {
       'c1': {
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis, sapien quis tempus laoreet, est enim tincidunt mi, et pulvinar orci nulla ac ipsum. Phasellus tempus neque massa, ut tempor felis tempus sed. Sed semper sem quis augue fermentum, id tincidunt ipsum sagittis. Nam ultricies non erat in aliquet. Fusce viverra mi a tellus venenatis, in iaculis ante posuere. Interdum et malesuada fames ac ante ipsum primis in faucibus.',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis, sapien quis tempus laoreet, est enim tincidunt mi, et pulvinar orci nulla ac ipsum. Phasellus tempus neque massa, ut tempor felis tempus sed.',
         childIds: ['c2', 'c3']
       },
       'c2': {
-        text: 'Duis dapibus sed dui id facilisis. Sed ac ligula non mi fermentum mattis id sit amet urna. Fusce commodo elit libero, a varius justo tincidunt in. Cras ipsum libero, euismod sit amet risus non, placerat sodales lectus. Nunc sit amet arcu in risus posuere ullamcorper. Duis egestas ante a enim molestie, sit amet blandit nisi ultricies. Ut tempor nisi erat, ac tincidunt metus faucibus et. Fusce id commodo mauris, at convallis sem. Phasellus eget eros sodales, pretium ante eget, porta nunc. Pellentesque lacus velit, venenatis nec accumsan eu, facilisis iaculis risus.',
+        text: 'Duis dapibus sed dui id facilisis. Sed ac ligula non mi fermentum mattis id sit amet urna. Fusce commodo elit libero, a varius justo tincidunt in. Cras ipsum libero, euismod sit amet risus non, placerat sodales lectus.',
         parentId: 'c1'
       },
       'c3': {
-        text: 'Duis nisl magna, commodo non tellus ac, tristique egestas velit. Proin eget eros viverra ex venenatis convallis eu sed orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque vel viverra turpis, egestas fringilla neque. Quisque turpis ipsum, tempus sit amet molestie non, mattis ac massa. Curabitur ut iaculis lorem, quis fermentum libero. Vivamus id felis eu metus faucibus imperdiet et ut ligula.',
-        parentId: 'c2'
+        text: 'Duis nisl magna, commodo non tellus ac, tristique egestas velit. Proin eget eros viverra ex venenatis convallis eu sed orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
+        parentId: 'c1'
       }
     },
     ids: ['c1', 'c2', 'c3']
@@ -40,12 +43,23 @@ export default () => {
 
   return (
     <Provider store={store}>
-      <MuiContainer>
-        <RootComments/>
-      </MuiContainer>
+      <Grid container>
+        <Grid item xs={3} sm={3} md={6}>
+          <MuiContainer>
+            <RootComments/>
+          </MuiContainer>
+        </Grid>
+        <Grid item xs={3} sm={3} md={6}>
+          <MuiContainer>
+            <State/>
+          </MuiContainer>
+        </Grid>
+      </Grid>
     </Provider>
   );
 };
+
+const State = connect(state => ({state}))(StatePresenter);
 
 const Comments = connect(
   null,
@@ -62,7 +76,7 @@ const Comments = connect(
     const showInput = () => setShouldShowInput(true);
 
     const handleAddComment = () => {
-      if (newComment !== '') {
+      if (newComment.trim() !== '') {
         addComment(newComment);
         setShouldShowInput(false);
         setNewComment('');
@@ -78,6 +92,8 @@ const Comments = connect(
         <div style={{ marginBottom: 12 }}>
           {shouldShowInput &&
           <div>
+            <MuiLink onClick={handleAddComment} style={linkStyle}>Add Comment</MuiLink>
+            <br/>
             <MuiTextField
               value={newComment}
               onChange={handleChangeNewComment}
@@ -85,8 +101,6 @@ const Comments = connect(
               autoFocus={true}
               multiline
             />
-            <br/>
-            <MuiLink onClick={handleAddComment} style={linkStyle}>Add Comment</MuiLink>
           </div>
           }
 

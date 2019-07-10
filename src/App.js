@@ -18,7 +18,7 @@ class App extends Component {
     };
 
     return (
-      <Router>
+      <Router basename="relational-entities-reducer-examples">
         <CssBaseline/>
 
         <AppBar position="absolute">

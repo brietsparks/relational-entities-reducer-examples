@@ -44,12 +44,12 @@ export default () => {
   return (
     <Provider store={store}>
       <Grid container>
-        <Grid item xs={3} sm={3} md={6}>
+        <Grid item xs={12} sm={12} md={6}>
           <MuiContainer>
             <RootComments/>
           </MuiContainer>
         </Grid>
-        <Grid item xs={3} sm={3} md={6}>
+        <Grid item xs={12} sm={12} md={6}>
           <MuiContainer>
             <State/>
           </MuiContainer>
@@ -92,7 +92,7 @@ const Comments = connect(
         <div style={{ marginBottom: 12 }}>
           {shouldShowInput &&
           <div>
-            <MuiLink onClick={handleAddComment} style={linkStyle}>Add Comment</MuiLink>
+            <MuiLink onClick={handleAddComment} style={linkStyle}>Submit</MuiLink>
             <br/>
             <MuiTextField
               value={newComment}

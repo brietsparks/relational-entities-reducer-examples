@@ -50,12 +50,12 @@ export const App = () => {
   return (
     <Provider store={store}>
       <Grid container>
-        <Grid item xs={3} sm={3} md={6}>
+        <Grid item xs={12} sm={12} md={6}>
           <MuiContainer>
             <Todos/>
           </MuiContainer>
         </Grid>
-        <Grid item xs={3} sm={3} md={6}>
+        <Grid item xs={12} sm={12} md={6}>
           <MuiContainer>
             <State/>
           </MuiContainer>

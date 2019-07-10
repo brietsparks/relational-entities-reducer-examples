@@ -14,7 +14,7 @@
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
-    "relational-entities-reducer": "^0.1.0",
+    "relational-entities-reducer": "^0.4.0",
     "uuid": "^3.3.2"
   },
   "scripts": {

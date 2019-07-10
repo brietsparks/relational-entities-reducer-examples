@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
-import Example1 from './example1';
+import Todos from './examples/1-lists';
 
 class App extends Component {
   render() {
     return (
-      <Example1/>
+      <div>
+        <Todos/>
+      </div>
     );
   }
 }

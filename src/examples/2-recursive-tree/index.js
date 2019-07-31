@@ -16,7 +16,7 @@ import schema from './schema';
 import { configureStore } from '../store';
 import { randomString } from '../util';
 
-const { reducer, actions, emptyState, selectors } = makeReducerAndActions(schema);
+const { reducer, actionCreators, selectors } = makeReducerAndActions(schema);
 
 const initialState = {
   comment: {
@@ -46,7 +46,9 @@ export default () => {
       <Grid container>
         <Grid item xs={12} sm={12} md={6}>
           <MuiContainer>
-            <RootComments/>
+            <div style={{ paddingTop: 35 }}>
+              <RootComments/>
+            </div>
           </MuiContainer>
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
@@ -64,7 +66,7 @@ const State = connect(state => ({state}))(StatePresenter);
 const Comments = connect(
   null,
   (dispatch, { parentId }) => ({
-    addComment: text => dispatch(actions.add(['comment', randomString(), { parentId, text }]))
+    addComment: text => dispatch(actionCreators.add(['comment', randomString(), { parentId, text }]))
   })
 )(
   ({ ids = [], parentId, addComment }) => {
@@ -125,14 +127,14 @@ const commentRemovalSchema = () => ({
 
 const Comment = connect(
   (state, { id }) => {
-    const comment = selectors.getResource(state, ['comment', id]);
+    const comment = selectors.getResource(state, { type: 'comment', id });
     return { ...comment };
   },
   (dispatch, { id }) => ({
-    remove: () => dispatch(actions.remove([
-      'comment', id, { removeRelated: { childIds: commentRemovalSchema } }
+    remove: () => dispatch(actionCreators.remove([
+      'comment', id, { removalSchema: { childIds: commentRemovalSchema } }
     ])),
-    edit: change => dispatch(actions.edit(['comment', id, change]))
+    edit: change => dispatch(actionCreators.edit(['comment', id, change]))
   })
 )(
   ({ id, text, parentId, childIds, remove }) => {
@@ -159,9 +161,9 @@ const Comment = connect(
 );
 
 const getRootCommentIds = state => {
-  const ids = selectors.getIds(state, 'comment');
+  const ids = selectors.getEntityIds(state, { type: 'comment' });
   return ids.filter(id => {
-    const comment = selectors.getResource(state, ['comment', id]);
+    const comment = selectors.getResource(state, { type: 'comment', id });
     return !comment.parentId;
   })
 };

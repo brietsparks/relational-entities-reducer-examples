@@ -6,15 +6,18 @@
   "dependencies": {
     "@material-ui/core": "^4.1.3",
     "@material-ui/icons": "^4.2.1",
+    "material-ui-color-picker": "^3.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-json-view": "^1.19.1",
     "react-pose": "^4.0.8",
-    "react-redux": "^6.0.1",
+    "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
-    "relational-entities-reducer": "^0.4.0",
+    "relational-entities-reducer": "^0.5.0",
+    "styled-components": "^4.3.2",
     "uuid": "^3.3.2"
   },
   "scripts": {

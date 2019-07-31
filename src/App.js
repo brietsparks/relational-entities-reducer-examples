@@ -7,6 +7,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 
 import Todos from './examples/1-lists';
 import Comments from './examples/2-recursive-tree';
+import KanbanApp from './examples/3-kanban-app';
 
 class App extends Component {
   render() {
@@ -26,6 +27,7 @@ class App extends Component {
             <nav>
               <Link to="/list" style={linkStyle}>List</Link>
               <Link to="/tree" style={linkStyle}>Tree</Link>
+              <Link to="/kanban-app" style={linkStyle}>Kanban App</Link>
               <a
                 href="https://github.com/brietsparks/relational-entities-reducer-examples"
                 style={linkStyle}
@@ -48,10 +50,11 @@ class App extends Component {
           </Toolbar>
         </AppBar>
 
-        <div style={{ paddingTop: 100 }}>
-          <Route exact path="/" component={Todos} />
+        <div style={{ paddingTop: 65 }}>
+          {/*<Route exact path="/" component={Todos} />*/}
           <Route exact path="/list" component={Todos} />
           <Route exact path="/tree" component={Comments} />
+          <Route exact path="/kanban-app" component={KanbanApp} />
         </div>
       </Router>
     );

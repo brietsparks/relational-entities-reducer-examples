@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, Provider } from 'react-redux';
-import makeReducerAndActions from 'relational-entities-reducer';
+import makeEntities from 'relational-entities-reducer';
 
 import posed, { PoseGroup } from 'react-pose'
 
@@ -24,7 +24,7 @@ import schema from './schema';
 import { configureStore } from '../store';
 import { randomString } from '../util';
 
-const { reducer, actions, selectors } = makeReducerAndActions(schema);
+const { reducer, actionCreators, selectors } = makeEntities(schema);
 
 const initialState = {
   list: {
@@ -51,9 +51,11 @@ export const App = () => {
     <Provider store={store}>
       <Grid container>
         <Grid item xs={12} sm={12} md={6}>
-          <MuiContainer>
-            <Todos/>
-          </MuiContainer>
+            <MuiContainer>
+              <div style={{ paddingTop: 35 }}>
+                <Todos/>
+              </div>
+            </MuiContainer>
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
           <MuiContainer>
@@ -70,10 +72,10 @@ const State = connect(state => ({state}))(StatePresenter);
 // Todos is a collection of lists
 export const Todos = connect(
   state => ({
-    ids: selectors.getIds(state, 'list')
+    ids: selectors.getEntityIds(state, { type: 'list' })
   }),
   dispatch => ({
-    addList: () => dispatch(actions.add(
+    addList: () => dispatch(actionCreators.add(
       ['list', randomString(), { itemIds: [randomString()] }]
     ))
   })
@@ -98,7 +100,7 @@ export const Todos = connect(
 // List is a collection of items
 const List = connect(
   (state, { id }) => {
-    const list = selectors.getResource(state, ['list', id]);
+    const list = selectors.getResource(state, { type: 'list', id });
 
     if (!list) {
       return {}; // the animation might not be done by the time the state updates
@@ -107,17 +109,17 @@ const List = connect(
     return { title: list.title, itemIds: list.itemIds }
   },
   (dispatch, { id, index }) => ({
-    addItem: () => dispatch(actions.add(['item', randomString(), { listId: id }])),
-    remove: () => dispatch(actions.remove([
-      'list', id, { removeRelated: { itemIds: {} } }
-    ])),
-    edit: changes => dispatch(actions.edit(['list', id, changes])),
+    addItem: () => dispatch(actionCreators.add(['item', randomString(), { listId: id }])),
+    remove: () => dispatch(actionCreators.remove(
+      ['list', id, { removalSchema: { itemIds: {} } }],
+    )),
+    edit: changes => dispatch(actionCreators.edit(['list', id, changes])),
     moveUp: () => {
       if (index > 0) {
-        dispatch(actions.reindex('list', index, index - 1))
+        dispatch(actionCreators.reindex('list', index, index - 1))
       }
     },
-    moveDown: () => dispatch(actions.reindex('list', index, index + 1))
+    moveDown: () => dispatch(actionCreators.reindex('list', index, index + 1))
   })
 )(
   function List({ id, title, itemIds = [], isFirst, isLast, addItem, remove, edit, moveUp, moveDown }) {
@@ -157,18 +159,18 @@ const List = connect(
 
 const Item = connect(
   (state, { id }) => {
-    const item = selectors.getResource(state, ['item', id]);
+    const item = selectors.getResource(state, { type: 'item', id });
     return { description: item.description, listId: item.listId }
   },
   (dispatch, { id, index, listId }) => ({
-    remove: () => dispatch(actions.remove(['item', id])),
-    edit: changes => dispatch(actions.edit(['item', id, changes])),
+    remove: () => dispatch(actionCreators.remove(['item', id])),
+    edit: changes => dispatch(actionCreators.edit(['item', id, changes])),
     moveUp: () => {
       if (index > 0) {
-        dispatch(actions.reindexRelated('list', listId, 'itemIds', index, index - 1))
+        dispatch(actionCreators.reindexRelated('list', listId, 'itemIds', index, index - 1))
       }
     },
-    moveDown: () => dispatch(actions.reindexRelated('list', listId, 'itemIds', index, index + 1))
+    moveDown: () => dispatch(actionCreators.reindexRelated('list', listId, 'itemIds', index, index + 1))
   })
 )(
   function Item({ id, index, description, listId, isFirst, isLast, remove, edit, moveUp, moveDown }) {

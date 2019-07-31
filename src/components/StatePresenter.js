@@ -1,15 +1,16 @@
 import React from 'react';
+import JsonView from 'react-json-view';
 
-const StatePresenter = ({ state }) => {
-  const style = {
-    overflowX: 'scroll'
-  };
-
+const StatePresenter = ({ state, level = 4 }) => {
   return (
-    <pre style={style}>
-      {JSON.stringify(state, null, 2)}
-    </pre>
-  );
+    <JsonView
+      style={{ padding: 15 }}
+      src={state}
+      theme="monokai"
+      collapsed={level}
+      displayObjectSize={false}
+    />
+  )
 };
 
 export default StatePresenter;

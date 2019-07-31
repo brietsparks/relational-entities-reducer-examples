@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/relational-entities-reducer-examples/precache-manifest.ffc4a2f0d5c964db39f4766f2c74cd7b.js"
+  "/relational-entities-reducer-examples/precache-manifest.eac62a1db8eb336aed76c6523ff6f515.js"
 );
 
 workbox.clientsClaim();
